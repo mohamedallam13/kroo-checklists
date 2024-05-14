@@ -1,0 +1,28 @@
+<script>
+
+    document.getElementById('startup-checklist-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        const data = {};
+        formData.forEach((value, key) => {
+            data[key] = value;
+        });
+
+        google.script.run.withSuccessHandler(function (response) {
+            alert('Checklist submitted successfully');
+        }).submitChecklist(data);
+    });
+
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function () {
+            const checklistItem = this.closest('.checklist-item');
+            if (this.checked) {
+                checklistItem.style.backgroundColor = 'var(--highlight-color)';
+            } else {
+                checklistItem.style.backgroundColor = 'var(--checklist-bg-color)';
+            }
+        });
+    });
+
+</script>

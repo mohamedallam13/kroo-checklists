@@ -1,0 +1,152 @@
+<div class="container">
+    <header>
+        <h1>📝 Start up Checklist</h1>
+        <p>More info: <a href="#">KROO SOP</a></p>
+    </header>
+    <form id="startup-checklist-form">
+        <div class="checklist-item">
+            <div class="item-header">
+                <span class="item-number">1</span>
+                <span class="item-emoji">⚡️</span>
+                <span class="item-title">Electricity</span>
+                <input type="checkbox" name="electricity-check">
+            </div>
+            <div class="item-details">
+                <input type="text" name="electricity-credit" placeholder="Credit (EGP)">
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-header">
+                <span class="item-number">2</span>
+                <span class="item-emoji">🔋</span>
+                <span class="item-title">Battery</span>
+                <input type="checkbox" name="battery-check">
+            </div>
+            <div class="item-details">
+                <select name="battery-status">
+                    <option value="on">On</option>
+                    <option value="off">Off</option>
+                </select>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-header">
+                <span class="item-number">3</span>
+                <span class="item-emoji">🌐</span>
+                <span class="item-title">WE Internet / DSL</span>
+                <input type="checkbox" name="internet-check">
+            </div>
+            <div class="item-details">
+                <input type="text" name="internet-line1" placeholder="Line 1 (GB)">
+                <input type="text" name="internet-line2" placeholder="Line 2 (GB)">
+                <input type="text" name="internet-line3" placeholder="Line 3 (GB)">
+                <select name="internet-status">
+                    <option value="need-charge">Need to Charge / Renew?</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-header">
+                <span class="item-number">4</span>
+                <span class="item-emoji">📶</span>
+                <span class="item-title">Orange Internet / Backup</span>
+                <input type="checkbox" name="orange-check">
+            </div>
+            <div class="item-details">
+                <input type="text" name="orange-package" placeholder="Package (GB)">
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-header">
+                <span class="item-number">5</span>
+                <span class="item-emoji">📹</span>
+                <span class="item-title">DVR / Cameras</span>
+                <input type="checkbox" name="dvr-check">
+            </div>
+            <div class="item-details">
+                <select name="dvr-status">
+                    <option value="on">On</option>
+                    <option value="off">Off</option>
+                </select>
+                <select name="dvr-reset">
+                    <option value="reset">Reset?</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-header">
+                <span class="item-number">6</span>
+                <span class="item-emoji">☕️</span>
+                <span class="item-title">Unpaid Drinks</span>
+                <input type="checkbox" name="unpaid-drinks-check">
+            </div>
+            <div class="item-details">
+                <select name="unpaid-drinks-notified">
+                    <option value="notified">Notified?</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-header">
+                <span class="item-number">7</span>
+                <span class="item-emoji">🔔</span>
+                <span class="item-title">Ending Subscriptions</span>
+                <input type="checkbox" name="subscriptions-check">
+            </div>
+            <div class="item-details">
+                <select name="subscriptions-notified">
+                    <option value="notified">Notified?</option>
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-header">
+                <span class="item-number">8</span>
+                <span class="item-emoji">📦</span>
+                <span class="item-title">Missing Supplies</span>
+                <input type="checkbox" name="missing-supplies-check">
+            </div>
+            <div class="item-details">
+                <label for="kitchen-cafe">Kitchen / Cafe</label>
+                <input type="text" id="kitchen-cafe" name="kitchen-cafe">
+                <label for="bathrooms">Bathrooms</label>
+                <input type="text" id="bathrooms" name="bathrooms">
+            </div>
+        </div>
+        <div class="checklist-item">
+            <div class="item-header">
+                <span class="item-number">9</span>
+                <span class="item-emoji">🛠️</span>
+                <span class="item-title">General Maintenance</span>
+                <input type="checkbox" name="general-maintenance-check">
+            </div>
+            <div class="item-details">
+                <label for="maintenance-kitchen-cafe">Kitchen / Cafe</label>
+                <input type="text" id="maintenance-kitchen-cafe" name="maintenance-kitchen-cafe">
+                <label for="maintenance-bathrooms">Bathrooms</label>
+                <input type="text" id="maintenance-bathrooms" name="maintenance-bathrooms">
+                <label for="maintenance-lights">Lights</label>
+                <input type="text" id="maintenance-lights" name="maintenance-lights">
+                <label for="maintenance-plugs">Plugs</label>
+                <input type="text" id="maintenance-plugs" name="maintenance-plugs">
+                <label for="maintenance-desks">Desks</label>
+                <input type="text" id="maintenance-desks" name="maintenance-desks">
+                <label for="maintenance-chairs">Chairs</label>
+                <input type="text" id="maintenance-chairs" name="maintenance-chairs">
+                <label for="maintenance-doors">Doors</label>
+                <input type="text" id="maintenance-doors" name="maintenance-doors">
+                <label for="maintenance-ac">A/Cs</label>
+                <input type="text" id="maintenance-ac" name="maintenance-ac">
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>

@@ -2,15 +2,38 @@
 
     document.getElementById('startup-checklist-form').addEventListener('submit', function (event) {
         event.preventDefault();
+
+        const formId = event.target.id;
         const formData = new FormData(this);
-        const data = {};
+        const data = { formId };
+
         formData.forEach((value, key) => {
             data[key] = value;
         });
 
-        google.script.run.withSuccessHandler(function (response) {
-            alert('Checklist submitted successfully');
-        }).submitChecklist(data);
+        console.log(data)
+
+        // Check if all checkboxes in this form are checked
+        const uncheckedSections = [];
+        const checkboxes = this.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            if (!checkbox.checked) {
+                const sectionTitle = checkbox.closest('.checklist-item').querySelector('.item-title').textContent;
+                const sectionEmoji = checkbox.closest('.checklist-item').querySelector('.item-emoji').textContent;
+                uncheckedSections.push(`${sectionEmoji} ${sectionTitle}`);
+            }
+        });
+
+        if (uncheckedSections.length > 0) {
+            showToast(uncheckedSections, 'Missing unchecked steps:');
+        } else {
+            showModal('Submitting...');
+            google.script.run.withSuccessHandler(function (response) {
+                showToast(['✔️ Checklist submitted successfully'], 'Success:');
+                showModal('Success', true);
+            }).submitChecklist(data);
+        }
+
     });
 
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -25,4 +48,51 @@
         });
     });
 
+    // Function to show toast message
+    function showToast(messages, header) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+
+        const headerElement = document.createElement('div');
+        headerElement.className = 'toast-header';
+        headerElement.textContent = header;
+        toast.appendChild(headerElement);
+
+        const list = document.createElement('ul');
+        messages.forEach(message => {
+            const listItem = document.createElement('li');
+            listItem.textContent = message;
+            list.appendChild(listItem);
+        });
+        toast.appendChild(list);
+
+        document.body.appendChild(toast);
+        setTimeout(() => {
+            toast.remove();
+        }, 3000);
+    }
+
+    // Function to show modal
+    function showModal(message, success = false) {
+        const modal = document.getElementById('modal');
+        const modalHeader = document.getElementById('modal-header');
+        const modalBody = document.getElementById('modal-body');
+
+        modalHeader.textContent = message;
+        if (success) {
+            modalBody.innerHTML = '<div class="success-icon">✔️</div>';
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 2000);
+        } else {
+            modalBody.innerHTML = '<div class="loader"></div>';
+        }
+        modal.style.display = 'flex';
+    }
+
+    window.addEventListener('beforeunload', function (event) {
+        event.preventDefault();
+        event.returnValue = ''; // This empty string will show the default browser confirmation dialog
+    });
+    
 </script>

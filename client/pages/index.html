@@ -1,10 +1,14 @@
 <!-- Paths -->
+<!-- Components -->
+<? const Modal = 'client/components/modal' ?>
+
 <!-- Checklists -->
 <? const StartupCheckList = 'client/checklists/startup-checklist' ?>
 
 
 <!-- CSS -->
 <? const indexCSS = 'client/pages/index-css' ?>
+<? const ModalCSS = 'client/components/modal-css' ?>
 
 <!-- Javascript -->
 <? const indexJS = 'client/pages/index-js' ?>
@@ -15,18 +19,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checklist Application</title>
+    <title>KROO Checklist Application</title>
 
     <?!= _I(indexCSS) ?>
+    <?!= _I(ModalCSS) ?>
 
 </head>
 
 <body>
-    
-    <div id="startup-checklist-container">
-        <?!= _I(StartupCheckList) ?>
-    </div>
 
+    <!-- <div class= "checklist-containers" id="startup-checklist-container"> -->
+        <?!= _I(StartupCheckList) ?>
+        <!-- </div> -->
+        <?!= _I(Modal) ?>
 
     <?!= _I(indexJS) ?>
 </body>

@@ -1,39 +1,67 @@
 <script>
 
-    document.getElementById('startup-checklist-form').addEventListener('submit', function (event) {
-        event.preventDefault();
+    // Add form name to the select dropdown
+    document.querySelectorAll('.checklist-container').forEach(container => {
+        const formSelect = document.getElementById('checklist-select')
+        const formId = container.id;
+        const formName = container.getAttribute('name'); // Use getAttribute('name') instead of .name
+        const option = document.createElement('option');
+        option.text = formName;
+        option.value = formId;
+        formSelect.appendChild(option);
+    })
 
-        const formId = event.target.id;
-        const formData = new FormData(this);
-        const data = { formId };
+    document.querySelectorAll('.checklist-form').forEach(form => {
+        console.log(form.id)
 
-        formData.forEach((value, key) => {
-            data[key] = value;
-        });
-
-        console.log(data)
-
-        // Check if all checkboxes in this form are checked
-        const uncheckedSections = [];
-        const checkboxes = this.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            if (!checkbox.checked) {
-                const sectionTitle = checkbox.closest('.checklist-item').querySelector('.item-title').textContent;
-                const sectionEmoji = checkbox.closest('.checklist-item').querySelector('.item-emoji').textContent;
-                uncheckedSections.push(`${sectionEmoji} ${sectionTitle}`);
+        // Add event listener to the submit button
+        form.addEventListener('submit', function (event) {
+            console.log('Form submitted')
+            event.preventDefault();
+            const formId = event.target.id;
+            const formData = new FormData(this);
+            const data = { formId };
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+            console.log(data)
+            // Check if all checkboxes in this form are checked
+            const uncheckedSections = [];
+            const checkboxes = this.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                if (!checkbox.checked) {
+                    const sectionTitle = checkbox.closest('.checklist-item').querySelector('.item-title').textContent;
+                    const sectionEmoji = checkbox.closest('.checklist-item').querySelector('.item-emoji').textContent;
+                    uncheckedSections.push(`${sectionEmoji} ${sectionTitle}`);
+                }
+            });
+            if (uncheckedSections.length > 0) {
+                showToast(uncheckedSections, 'Missing unchecked steps:');
+            } else {
+                showModal('Submitting...');
+                google.script.run.withSuccessHandler(function (response) {
+                    showToast(['✔️ Checklist submitted successfully'], 'Success:');
+                    showModal('Success', true);
+                }).submitChecklist(data);
             }
         });
+    });
 
-        if (uncheckedSections.length > 0) {
-            showToast(uncheckedSections, 'Missing unchecked steps:');
-        } else {
-            showModal('Submitting...');
-            google.script.run.withSuccessHandler(function (response) {
-                showToast(['✔️ Checklist submitted successfully'], 'Success:');
-                showModal('Success', true);
-            }).submitChecklist(data);
-        }
+    document.addEventListener('DOMContentLoaded', function () {
+        const checklistSelect = document.getElementById('checklist-select');
+        const message = document.getElementById('message');
+        const formContainers = document.querySelectorAll('.checklist-container');
 
+        checklistSelect.addEventListener('change', function () {
+            console.log('Checklist selected: ' + this.value)
+            formContainers.forEach(container => container.classList.add('hidden'));
+            if (this.value) {
+                message.classList.add('hidden');
+                document.getElementById(this.value).classList.remove('hidden');
+            } else {
+                message.classList.remove('hidden');
+            }
+        });
     });
 
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
@@ -94,5 +122,5 @@
         event.preventDefault();
         event.returnValue = ''; // This empty string will show the default browser confirmation dialog
     });
-    
+
 </script>

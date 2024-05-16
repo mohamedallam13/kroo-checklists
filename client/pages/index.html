@@ -4,6 +4,9 @@
 
 <!-- Checklists -->
 <? const StartupCheckList = 'client/checklists/startup-checklist' ?>
+<? const ShutdownCheckList = 'client/checklists/shutdown-checklist' ?>
+<? const powerOutChecklist = 'client/checklists/powerout-checklist' ?>
+<? const powerRestoredCheckList = 'client/checklists/powerback-checklist' ?>
 
 
 <!-- CSS -->
@@ -27,11 +30,19 @@
 </head>
 
 <body>
-
-    <!-- <div class= "checklist-containers" id="startup-checklist-container"> -->
-        <?!= _I(StartupCheckList) ?>
-        <!-- </div> -->
-        <?!= _I(Modal) ?>
+    <div class="selector-container">
+        <label for="checklist-select">Select a checklist:</label>
+        <select id="checklist-select">
+            <option value="">Select a checklist</option>
+        </select>
+    </div>
+    <div id="message" class="centered-message">Select a checklist</div>
+    <!-- checklists -->
+    <?!= _I(StartupCheckList) ?>
+    <?!= _I(ShutdownCheckList) ?>
+    <?!= _I(powerOutChecklist) ?>
+    <?!= _I(powerRestoredCheckList) ?>
+    <?!= _I(Modal) ?>
 
     <?!= _I(indexJS) ?>
 </body>

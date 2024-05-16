@@ -15,14 +15,55 @@
         margin: 0;
         padding: 20px;
         display: flex;
-        justify-content: center;
-        align-items: flex-start;
+        justify-content: flex-start;
+        align-items: center;
         /* Ensure content starts at the top */
         min-height: 100vh;
         background-color: var(--background-color);
+        flex-direction: column;
+        /* Ensure content is displayed in a column */
     }
 
-    .container {
+    .hidden {
+        display: none;
+    }
+
+    .selector-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+        /* Make selector full width */
+    }
+
+    .selector-container label {
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    #checklist-select {
+        padding: 10px;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        background-color: #fff;
+        font-size: 16px;
+    }
+
+    .centered-message {
+        text-align: center;
+        font-size: 20px;
+        color: #666;
+        margin-top: 50px;
+    }
+
+    #message {
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #666;
+    }
+
+    .checklist-container {
         background-color: var(--container-bg-color);
         padding: 20px;
         border-radius: 8px;
@@ -175,7 +216,7 @@
 
     /* Responsive design */
     @media (max-width: 600px) {
-        .container {
+        .checklist-container {
             padding: 15px;
         }
 
@@ -189,5 +230,10 @@
         .item-details select {
             width: calc(100% - 10px);
         }
+    }
+
+    .success-icon {
+        color: green;
+        font-size: 50px;
     }
 </style>

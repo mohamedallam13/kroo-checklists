@@ -18,7 +18,7 @@
     }
 
     function submitChecklist(data) {
-        const timestamp = timestampCreate(undefined, "MM/DD/YYYY HH:mm:ss")
+        const timestamp = timestampCreate(undefined, "MM/dd/yyyy HH:mm:ss")
         const { formId } = data
         const sheetObj = getSheetObj(formId)
         const writeArray = createWriteArr({ timestamp, ...data }, sheetObj)
